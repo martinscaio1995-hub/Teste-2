@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+saida/
+dados/cache_rdap.json
+dados/rdap_bootstrap.json
+dados/public_suffix_list.dat
+dados/*.tmp
