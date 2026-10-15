@@ -10,7 +10,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
-from .dominio import USER_AGENT
+from .dominio import USER_AGENT, normalizar_url
 
 WIKIDATA_SPARQL = "https://query.wikidata.org/sparql"
 
@@ -77,7 +77,9 @@ def ler_manual(caminho):
         linhas = []
         for r in csv.DictReader(f):
             if (r.get("site") or "").strip():
-                linhas.append({c: (r.get(c) or "").strip() for c in CAMPOS} | {"fonte": "manual"})
+                linha = {c: (r.get(c) or "").strip() for c in CAMPOS} | {"fonte": "manual"}
+                linha["site"] = normalizar_url(linha["site"])
+                linhas.append(linha)
         return linhas
 
 
